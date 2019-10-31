@@ -1,0 +1,10 @@
+{
+    "name": "vue-iplus",
+    "version": "1.0.1",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "lodash": "^4.17.15",
+        "vue-resize": "^0.4.5"
+    }
+}
