@@ -1,6 +1,6 @@
-import {merge} from "lodash";
-import {_debounce} from "./debounce-method.mixin.js";
-import {_throttle} from "./throttle-method.mixin.js";
+import merge from "lodash/merge";
+import _debounce from "./debounce-method.mixin.js";
+import _throttle from "./throttle-method.mixin.js";
 
 
 //整体的

@@ -1,6 +1,8 @@
 let path = require("path");
 let HtmlWebpackPlugin = require("html-webpack-plugin");
 let MiniCssExtract = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const webpack = require("webpack");
 
 const fs = require('fs')
 const glob = require('glob')
@@ -12,7 +14,7 @@ const SOURCE_DIR_NAME = "src";
 const TARGET_DIR_NAME = "dist";
 
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 
 // 获取文件公共方法
@@ -36,7 +38,7 @@ const getFiles = filesPath => {
         let filePath = path.resolve(appDirectory, relativePath);
 
         obj[entryName] = {
-            path:filePath,
+            path: filePath,
             filePath,
             relativePath,
             entryName,
@@ -49,7 +51,6 @@ const getFiles = filesPath => {
 }
 
 
-
 module.exports = {
     devServer: {
         port: 3000,
@@ -59,13 +60,18 @@ module.exports = {
     },
     // mode: "development",
     mode: "production",
-    entry: Object.values(getFiles("src/**/*.js")).reduce((ret, el)=>{
+    entry: Object.values(getFiles("src/**/*.+(js)")).reduce((ret, el) => {
         ret[el.entryName] = el.filePath;
         return ret;
     }, {}),
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        libraryTarget: 'umd',
+        umdNamedDefine: true
+    },
+    resolve: {
+        extensions: ['*', '.js', '.vue', '.json']
     },
     plugins: [
         // new HtmlWebpackPlugin({
@@ -81,20 +87,36 @@ module.exports = {
         //     filename: 'main.css'
         // }),
         new CleanWebpackPlugin(),
+
+        //vue相关
+        new VueLoaderPlugin(),
+
+
+        // short-circuits all Vue.js warning code
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
     ],
     module: {
-        rules: [{
-            test: /\.css$/,
-            use: [
-                MiniCssExtract.loader,
-                'css-loader',
-                'postcss-loader'
-            ]
-        },
+        rules: [
+            {
+                test: /\.pug$/,
+                loader: 'pug-plain-loader'
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    //MiniCssExtract.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ]
+            },
             {
                 test: /\.less$/,
                 use: [
-                    MiniCssExtract.loader,
+                    //MiniCssExtract.loader,
                     'css-loader',
                     'less-loader',
                     'postcss-loader'
@@ -117,7 +139,29 @@ module.exports = {
                         ]
                     }
                 }
-            }
+            },
+
+
+            //vue
+            {
+                test: /\.vue$/,
+                use: [
+                    {
+                        loader: 'cache-loader'
+                    },
+                    {
+                        loader: 'thread-loader'
+                    },
+                    {
+                        loader: 'vue-loader',
+                        options: {
+                            compilerOptions: {
+                                preserveWhitespace: false
+                            },
+                        }
+                    }
+                ]
+            },
         ]
     }
 }
