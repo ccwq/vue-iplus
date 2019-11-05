@@ -33,7 +33,7 @@
 
 
     //标识ie
-    let isIE
+    let isIE;
 
 
     //避免多次判断
@@ -48,14 +48,15 @@
         name: 'resizer',
 
         props:{
-
             //尺寸偏移
-            sizeOffset:{
-                default:_=>({
-                    width:0,
-                    height:0,
-                }),
-                type:Object,
+            offsetWidth:{
+                default:0,
+                type:Number,
+            },
+
+            offsetHeight:{
+                default:0,
+                type:Number,
             },
 
             debounce:{
@@ -75,6 +76,13 @@
                 default:false,
                 type:Boolean,
             },
+
+
+            //当初始化完成的时候触发
+            emitWhenReady:{
+                default: true,
+                type:Boolean,
+            }
         },
 
         mounted () {
@@ -83,16 +91,15 @@
 
             //尺寸变化的处理
             const _resizeHandler = _=> {
-                if (this._w !== this.$el.offsetWidth || this._h !== this.$el.offsetHeight) {
-                    this._w = this.$el.offsetWidth;
-                    this._h = this.$el.offsetHeight;
-                    this.$emit('input',
-                        m._w + (m.sizeOffset.width  || 0),
-                        m._h + (m.sizeOffset.height || 0),
+                if (m._w !== m.$el.offsetWidth || m._h !== m.$el.offsetHeight) {
+                    m._w = m.$el.offsetWidth;
+                    m._h = m.$el.offsetHeight;
+                    m.$emit('input',
+                        m._w + (m.offsetWidth  || 0),
+                        m._h + (m.offsetHeight || 0),
                     )
                 }
             }
-
 
             //关闭debounce和throttle
             if (m.fastMode) {
@@ -106,26 +113,39 @@
                 }
             }
 
-            this.$nextTick(() => {
-                this._w = this.$el.offsetWidth
-                this._h = this.$el.offsetHeight
+
+            m.$nextTick(_ => {
+                m._w = m.$el.offsetWidth;
+                m._h = m.$el.offsetHeight;
+
+                const object = document.createElement('object')
+                m._resizeObject = object
+                object.setAttribute('aria-hidden', 'true')
+                object.setAttribute('tabindex', -1)
+
+                object.onload = _=>{
+                    object.contentDocument.defaultView.addEventListener('resize', m.resizeHandler);
+                    _resizeHandler();
+
+                    //第一次派发
+                    if (m.emitWhenReady) {
+                        let size = [m._w + (m.offsetWidth || 0), m._h + (m.offsetHeight || 0)];
+                        m.$emit('input', ...size);
+                        m.$emit('ready', ...size);
+                    }
+                };
+
+                object.type = 'text/html'
+                if (isIE) {
+                    m.$el.appendChild(object)
+                }
+                object.data = 'about:blank'
+                if (!isIE) {
+                    m.$el.appendChild(object)
+                }
             })
-            const object = document.createElement('object')
-            this._resizeObject = object
-            object.setAttribute('aria-hidden', 'true')
-            object.setAttribute('tabindex', -1)
-            object.onload = _=>{
-                this._resizeObject.contentDocument.defaultView.addEventListener('resize', this.resizeHandler)
-                this.resizeHandler()
-            };
-            object.type = 'text/html'
-            if (isIE) {
-                this.$el.appendChild(object)
-            }
-            object.data = 'about:blank'
-            if (!isIE) {
-                this.$el.appendChild(object)
-            }
+
+
         },
 
 
@@ -159,7 +179,7 @@
         opacity: 0;
     }
 
-    .resize-observer >>> object {
+    .resizer-comp >>> object {
         display: block;
         position: absolute;
         top: 0;
