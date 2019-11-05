@@ -16,13 +16,14 @@ export default {
      * @param options.key 在window上绑定的对象名
      */
     install(vue, options) {
-
-
+        
+        //mixin
         vue.mixin(debounce);
         vue.mixin(throttle);
-        vue.mixin(debugMix);
+        vue.mixin(debugMix(options));
 
-        vue.component(resizer.$options.name, resizer);
+        //组件
+        vue.component(resizer.name, resizer);
 
     }
 }
