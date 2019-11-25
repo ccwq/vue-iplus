@@ -29,6 +29,7 @@
         "build": "webpack"
     },
     "dependencies": {
-        "lodash": "^4.17.15"
+        "lodash": "^4.17.15",
+        "v-charts": "^1.19.0"
     }
 }
