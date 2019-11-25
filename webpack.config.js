@@ -135,7 +135,10 @@ module.exports = {
                         ],
                         plugins: [
                             // 配置babel插件，转换更更高版本语法
-                            '@babel/plugin-proposal-class-properties'
+                            '@babel/plugin-proposal-class-properties',
+
+                            //配置a.<
+                            "@babel/plugin-proposal-optional-chaining"
                         ]
                     }
                 }
