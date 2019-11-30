@@ -9,7 +9,7 @@
                 :offsetWidth="offsetY"
             )
             ._container
-                slot( :size="size" )
+                slot( :size="size" :width="size[0]" :height="size[1]")
         slot(name="footer")
 
 </template>
