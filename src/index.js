@@ -27,7 +27,7 @@ export default {
         //组件
         vue.component(resizer.name, resizer);
 
-        Vue.directive("clickoutside", clickoutside);
+        vue.directive("clickoutside", clickoutside);
 
     }
 }
