@@ -4,6 +4,8 @@ import debugMix from "./mixin/console-by-name";
 
 import resizer from "./comp/resizer"
 
+import clickoutside from "./directives/clickoutside";
+
 /**
  * 用来辅助调试vue组件
  */
@@ -24,6 +26,8 @@ export default {
 
         //组件
         vue.component(resizer.name, resizer);
+
+        Vue.directive("clickoutside", clickoutside);
 
     }
 }
