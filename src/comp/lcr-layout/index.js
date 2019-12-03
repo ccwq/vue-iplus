@@ -1,3 +1,3 @@
-import lrcLayout from "./lrc-layout";
+import lrcLayout from "./lcr-layout";
 
 export default lrcLayout;

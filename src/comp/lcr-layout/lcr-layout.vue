@@ -1,6 +1,12 @@
-<template lang="pug">
-    .lcr-layout-comp.flex.ai-stretch.bbox
-        slot
+<style scoped type="text/css">
+    .lcr-layout-comp{
+        display: flex;
+        align-items: stretch;
+        box-sizing: border-box;
+    }
+</style>
+<template>
+    <div class="lcr-layout-comp"><slot></slot></div>
 </template>
 <script>
     import isPlainObject from "lodash/isPlainObject";
