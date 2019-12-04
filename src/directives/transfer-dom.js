@@ -1,6 +1,12 @@
 // Thanks to: https://github.com/airyland/vux/blob/v2/src/directives/transfer-dom/index.js
 // Thanks to: https://github.com/calebroseland/vue-dom-portal
 
+
+/**
+ * 加上<xxx v-transfer-dom data-transfer="true"></xxx>会使元素移动到body
+ * 加上<xxx v-transfer-dom="#app" data-transfer="true"></xxx>会使元素移动到#app内部
+ */
+
 /**
  * Get target DOM Node
  * @param {(Node|string|Boolean)} [node=document.body] DOM Node, CSS selector, or Boolean
