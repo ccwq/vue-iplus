@@ -47,6 +47,7 @@
             sizeHandler(w,h) {
                 const m = this;
                 m.size = [w, h];
+                m.$emit("change", m.size);
             }
         },
     }
