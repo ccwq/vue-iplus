@@ -14,8 +14,10 @@
 
 </template>
 <script>
+    import resizer from "../resizer/"
     export default {
         name: "v-box",
+        components: {resizer},
         data(){
             return {
                 size:[],
