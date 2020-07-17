@@ -52,18 +52,25 @@
                 type:Boolean,
                 default: false,
             },
+
+            //数字后面追加的单位
+            unit: {
+                type:String,
+                default:""
+            },
         },
 
 
         methods: {
             sizeHandler(w,h) {
                 const m = this;
-                m.size = [w, h];
-            },
-
-            getContainerRef(){
-
-            },
+                if (m.unit) {
+                    m.size = [w, h].map(el=>el + m.unit);
+                }else{
+                    m.size = [w, h];
+                }
+                m.$emit("change", m.size);
+            }
         },
 
         mounted() {
