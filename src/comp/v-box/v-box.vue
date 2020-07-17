@@ -75,7 +75,14 @@
 
         mounted() {
             const m = this;
-            m.$refs.slot_anchor.nextElementSibling.classList.add("_container");
+            m.$watch("raiseSlot", {
+                immediate: true,
+                handler(v){
+                    if (v) {
+                        m.$refs.slot_anchor.nextElementSibling.classList.add("_container");
+                    }
+                }
+            })
         }
     }
 </script>
