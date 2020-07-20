@@ -51,8 +51,7 @@ export default {
             }else{
                 fieldArr = field.split(/(\/|\.|\|)/);
             }
-            let _field = fieldArr.split(-1);
-
+            let _field = fieldArr.splice(-1);
             if (!fieldArr.length) {
                 m[_field] = value;
             }else{
