@@ -2,6 +2,7 @@
     <div class="v-drawer-comp"><slot></slot></div>
 </template>
 <script>
+    import debounce from "lodash/debounce"
     export default {
         name: "v-drawer",
 
@@ -62,11 +63,14 @@
                     el.style.overflow="hidden";
                 }
             }
+
+            const changeHandler = debounce(v=>{
+                v ? m.open() : m.close();
+            }, 75);
+
             m.$watch("value", {
                 immediate: false,
-                handler(v){
-                    v ? m.open() : m.close();
-                },
+                handler:changeHandler,
             });
         }
     }
