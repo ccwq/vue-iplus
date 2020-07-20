@@ -30,8 +30,6 @@
                 const m = this;
                 let el = m.$el;
                 clearTimeout(m.__open_t);
-                el.style.transitionDuration = m.duration + "s";
-                el.style.transitionProperty = "height";
                 el.style.height = el.scrollHeight + "px";
                 m.__open_t = setTimeout(_ => {
                     el.style.height = "auto";
@@ -44,10 +42,8 @@
                 let el = m.$el;
                 clearTimeout(m.__open_t);
                 el.style.height = el.scrollHeight + "px";
-                el.style.transitionDuration =  m.duration + "s";
-                el.style.transitionProperty = "height";
                 el.style.overflow="hidden";
-                await new Promise(r => setTimeout(r, 0));
+                await new Promise(r => setTimeout(r, 10));
                 el.style.height = 0 + "px";
             },
         },
@@ -55,6 +51,7 @@
         mounted() {
             const m = this;
             let el = m.$el;
+            el.style.transitionProperty = "height";
             if (el) {
                 if (m.value) {
                     el.style.height = "auto";
@@ -72,6 +69,13 @@
                 immediate: false,
                 handler:changeHandler,
             });
+
+            m.$watch("duration", {
+                immediate: true,
+                handler(duration){
+                    el.style.transitionDuration =  m.duration + "s";
+                }
+            })
         }
     }
 </script>
