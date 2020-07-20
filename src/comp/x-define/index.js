@@ -4,7 +4,7 @@ export default {
     data() {
         const m = this;
         return {
-            ...m.props.data,
+            ...m.data,
         }
     },
 
