@@ -42,7 +42,7 @@
                 el.style.height = el.scrollHeight + "px";
                 el.style.transitionDuration =  m.duration + "s";
                 el.style.transitionProperty = "height";
-                el.style.overflowY="hidden";
+                el.style.overflow="hidden";
                 await new Promise(r => setTimeout(r, 0));
                 el.style.height = 0 + "px";
             },
