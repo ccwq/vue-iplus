@@ -32,7 +32,10 @@
                 el.style.transitionDuration = m.duration + "s";
                 el.style.transitionProperty = "height";
                 el.style.height = el.scrollHeight + "px";
-                m.__open_t = setTimeout(_ => el.style.height = "auto", m.duration * 1000);
+                m.__open_t = setTimeout(_ => {
+                    el.style.height = "auto";
+                    el.style.overflow="visible";
+                }, m.duration * 1000);
             },
 
             async close(){
@@ -56,7 +59,7 @@
                     el.style.height = "auto";
                 }else{
                     el.style.height = 0 + "px";
-                    el.style.overflowY="hidden";
+                    el.style.overflow="hidden";
                 }
             }
             m.$watch("value", {
