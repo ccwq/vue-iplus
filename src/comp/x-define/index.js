@@ -26,7 +26,9 @@ export default {
         //默认data的配置
         data:{
             type:Object,
-            default:{},
+            default:_=>{
+                return {};
+            },
         },
     },
 
