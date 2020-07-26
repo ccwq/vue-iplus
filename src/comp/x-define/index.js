@@ -1,14 +1,27 @@
 import get from "lodash/get";
+
 export default {
     name:"x-define",
+
+
+
     data() {
         const m = this;
         return {
+            initData: m.defaultInitData,
+
             ...m.data,
         }
     },
 
     props:{
+
+        defaultInitData: {default:""},
+
+        init:{
+            type:[Function, String],
+            default:""
+        },
 
         //默认data的配置
         data:{
@@ -21,6 +34,7 @@ export default {
         exposeData(){
             const m = this;
             return {
+                initData:m.initData,
                 _set:m.set,
                 ...m.$attrs,
                 ...Object.keys(m.data).reduce((result, key)=>{
@@ -38,6 +52,36 @@ export default {
         }else{
             return this.$scopedSlots.default(this.exposeData);
         }
+    },
+
+    watch:{
+        init:{
+            immediate: true,
+            handler(init){
+                const m = this;
+                function initComplete(resp){
+                    m.initData = resp || m.defaultInitData;
+                }
+                if (init) {
+                    let resp;
+                    if (init.then) {
+                        init.then(initComplete)
+                        return;
+                    }
+                    resp = init(m);
+                    if (!resp) {
+                        console.warn('init无回复值');
+                    }
+                    if (resp.then) {
+                        resp.then(initComplete)
+                    }else{
+                        initComplete(resp);
+                    }
+                }else{
+                    console.warn('init无回复值');
+                }
+            },
+        },
     },
 
     methods: {
@@ -65,5 +109,3 @@ export default {
         }
     },
 }
-
-

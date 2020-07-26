@@ -63,7 +63,7 @@
 
             const changeHandler = debounce(v=>{
                 v ? m.open() : m.close();
-            }, 75);
+            }, 30);
 
             m.$watch("value", {
                 immediate: false,
