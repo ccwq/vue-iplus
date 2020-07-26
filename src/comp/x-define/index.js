@@ -19,7 +19,7 @@ export default {
         defaultInitData: {default:""},
 
         init:{
-            type:[Function, String],
+            type:[Function, String, Promise],
             default:""
         },
 
