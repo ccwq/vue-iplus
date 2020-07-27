@@ -3,8 +3,6 @@ import get from "lodash/get";
 export default {
     name:"x-define",
 
-
-
     data() {
         const m = this;
         return {
@@ -36,6 +34,7 @@ export default {
         exposeData(){
             const m = this;
             return {
+                _uid:m._uid,
                 initData:m.initData,
                 _set:m.set,
                 ...m.$attrs,
@@ -54,36 +53,6 @@ export default {
         }else{
             return this.$scopedSlots.default(this.exposeData);
         }
-    },
-
-    watch:{
-        init:{
-            immediate: true,
-            handler(init){
-                const m = this;
-                function initComplete(resp){
-                    m.initData = resp || m.defaultInitData;
-                }
-                if (init) {
-                    let resp;
-                    if (init.then) {
-                        init.then(initComplete)
-                        return;
-                    }
-                    resp = init(m);
-                    if (!resp) {
-                        console.warn('init无回复值');
-                    }
-                    if (resp.then) {
-                        resp.then(initComplete)
-                    }else{
-                        initComplete(resp);
-                    }
-                }else{
-                    console.warn('init无回复值');
-                }
-            },
-        },
     },
 
     methods: {
@@ -108,6 +77,32 @@ export default {
                     throw new Error("修改属性失败");
                 }
             }
+        }
+    },
+
+    mounted(){
+        const m = this;
+        let init = m.init;
+        function initComplete(resp){
+            m.initData = resp || m.defaultInitData;
+        }
+        if (init) {
+            let resp;
+            if (init.then) {
+                init.then(initComplete)
+                return;
+            }
+            resp = init(m);
+            if (!resp) {
+                console.warn('init无回复值');
+            }
+            if (resp.then) {
+                resp.then(initComplete)
+            }else{
+                initComplete(resp);
+            }
+        }else{
+            console.warn('init无回复值');
         }
     },
 }
