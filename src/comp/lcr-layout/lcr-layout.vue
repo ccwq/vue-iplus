@@ -10,6 +10,7 @@
 </template>
 <script>
     import isPlainObject from "lodash/isPlainObject";
+    import get from "lodash/get";
 
     const nameLs = [
         "left",
@@ -99,8 +100,7 @@
                     el.style.flex = "";
                     el.style.width = "";
 
-                    let css = m.attrLs?.[i]?.css;
-
+                    let css = get(m, `attrLs.[${i}].css`);
                     if (css) {
                         Object.keys(css).forEach(key=>{
                             el.style[key] = css[key];
