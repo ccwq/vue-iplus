@@ -48,7 +48,7 @@
     }
 
     export default {
-        name: "timer-counter",
+        name: "time-counter",
         data() {
             return {
                 playing$$: false,

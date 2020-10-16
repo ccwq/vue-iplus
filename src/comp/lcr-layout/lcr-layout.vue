@@ -92,8 +92,6 @@
                 if (!m.$el) {
                     return;
                 }
-
-
                 for(var i=0; i<m.$el.children.length; i++){
                     let el = m.$el.children[i];
 
