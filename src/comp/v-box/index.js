@@ -1,2 +1,2 @@
-import vBox from "./v-box";
+import vBox from "./v-box.vue";
 export default vBox;
