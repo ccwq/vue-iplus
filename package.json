@@ -1,6 +1,6 @@
 {
     "name": "vue-iplus",
-    "version": "1.5.10",
+    "version": "2.0.0",
     "main": "src/index.js",
     "license": "MIT",
     "scripts": {
