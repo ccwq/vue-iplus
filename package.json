@@ -35,5 +35,9 @@
         "view-plus": "^1.1.5",
         "vue": "^2.6.11",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "browser-image-size": "^1.1.0",
+        "lodash": "^4.17.15"
     }
 }
