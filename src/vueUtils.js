@@ -6,7 +6,8 @@
  * @param children
  * @returns {{path: *, component: *}}
  */
-export const defineRouter = function (path, component, others, children) {
+export const defineRouter = function (path, component, others={}, children) {
+
 
     //使用other字段传children修正
     if (Array.isArray(others)) {
@@ -19,10 +20,17 @@ export const defineRouter = function (path, component, others, children) {
         children = others.children;
     }
 
-    return {
+    let ret = {
         ...others,
         path,
-        component,
+        // component,
         children
-    };
+    }
+
+    if (typeof component == "string") {
+        ret.redirect = component;
+    }else{
+        ret.component = component;
+    }
+    return ret;
 };
