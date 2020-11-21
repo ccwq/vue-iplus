@@ -8,7 +8,6 @@
  */
 export const defineRouter = function (path, component, others={}, children) {
 
-
     //使用other字段传children修正
     if (Array.isArray(others)) {
         children = others;
