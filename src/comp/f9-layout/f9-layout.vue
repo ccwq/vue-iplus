@@ -253,54 +253,55 @@
     }
 </script>
 <style scoped lang="less">
-.f9layout-comp {
+.f9-layout-comp {
     position: relative;
+
+    > .bg {
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    > * {
+        position: relative;
+        z-index: 5;
+    }
+
+    > .bg div {
+        position: absolute;
+    }
+
+    > .bg .l {
+        left: 0;
+    }
+
+    > .bg .t {
+        top: 0;
+    }
+
+    > .bg .r {
+        right: 0;
+    }
+
+    > .bg .b {
+        bottom: 0;
+    }
+
+    > .bg .c {
+        background-repeat: repeat-x;
+    }
+
+    > .bg .m {
+        background-repeat: repeat-y;
+    }
+
+    > .bg .c.m {
+        background-repeat: repeat;
+    }
 }
 
-.f9layout-comp > .bg {
-    position: absolute;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
-.f9layout-comp > * {
-    position: relative;
-    z-index: 5;
-}
-
-.f9layout-comp > .bg div {
-    position: absolute;
-}
-
-.f9layout-comp > .bg .l {
-    left: 0;
-}
-
-.f9layout-comp > .bg .t {
-    top: 0;
-}
-
-.f9layout-comp > .bg .r {
-    right: 0;
-}
-
-.f9layout-comp > .bg .b {
-    bottom: 0;
-}
-
-.f9layout-comp > .bg .c {
-    background-repeat: repeat-x;
-}
-
-.f9layout-comp > .bg .m {
-    background-repeat: repeat-y;
-}
-
-.f9layout-comp > .bg .c.m {
-    background-repeat: repeat;
-}
 
 </style>
