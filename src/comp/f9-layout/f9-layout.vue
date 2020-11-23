@@ -12,10 +12,8 @@
 </template>
 <script>
     import imageSize from "browser-image-size";
-    import {get, compact} from "lodash";
-
-
-
+    import get from "lodash/get";
+    import compact from "lodash/compact"
     const classMap9 = {
         0:"l t",
         1:"c t",
@@ -27,6 +25,8 @@
         7:"c b",
         8:"r b",
     }
+
+
 
 
     const classMap3h = {0:"l", 1:"c", 2:"r"};
