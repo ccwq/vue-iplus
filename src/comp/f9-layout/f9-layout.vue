@@ -66,8 +66,10 @@
                 }
             },
 
+            //形如/static/foo/bar-0[index].png
+            //function(index, startNum){}
             urlPatten:{
-                type:String,
+                type:[String,Function],
                 default:"",
             },
 
@@ -143,6 +145,17 @@
                     return m.urlList;
                 }else{
                     return Array(m.type=="9"?9:3).fill(1).map((el, index)=>{
+
+                        let partten;
+
+                        if (typeof m.urlPatten == "string") {
+                            partten = m.urlPatten.replace(/\[index\]/g, index + m.startNum);
+                        }else if(typeof m.urlPatten == "function"){
+                            partten = m.urlPatten(index + m.startNum, m.startNum);
+                        }else{
+                            throw new Error("urlPatten参数错误")
+                        }
+
                         return m.urlPatten.replace(/\[index\]/g, index + m.startNum )
                     })
                 }
