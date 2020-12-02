@@ -1,5 +1,5 @@
 import darkThemeRunner from "./dark.theme"
-
+import echartsComp from "./ECharts.vue";
 
 export const colorLs = [
     "#feb64d",
