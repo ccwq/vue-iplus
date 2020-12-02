@@ -1,4 +1,4 @@
-export function run(echarts) {
+export default function(echarts) {
     var log = function (msg) {
         if (typeof console !== 'undefined') {
             console && console.error && console.error(msg);
