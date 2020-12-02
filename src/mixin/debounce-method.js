@@ -1,17 +1,12 @@
 import debounce from "lodash/debounce";
 
 export default {
-    beforeCreate() {
+    mounted() {
         const m = this;
-        let obj = m.$options.debounce;
-        Object.keys(obj||"").forEach(key=>{
-            let funBody = obj[key];
-            let [funName, wait] = key.split("_");
-            wait = parseFloat(wait);
-            if (isNaN(wait)) {
-                wait = 300;
-            }
-            m[funName] = debounce(funBody.bind(m), wait);
+
+        dom2component.set(m.$el, m);
+        m._destroy.then(__=>{
+            dom2component.delete(m.$el);
         })
-    }
+    },
 }
