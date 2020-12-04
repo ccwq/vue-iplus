@@ -1,7 +1,7 @@
 import debounce from "./mixin/debounce-method";
 import throttle from "./mixin/throttle-method";
 import debugMix from "./mixin/console-by-name";
-
+import {mixin as accessVueByDomMixin} from "./mixin/access-vue-by-dom";
 import resizer from "./comp/resizer"
 
 import clickoutside from "./directives/clickoutside";
@@ -24,6 +24,7 @@ export default {
         //mixin
         vue.mixin(debounce);
         vue.mixin(throttle);
+        vue.mixin(accessVueByDomMixin);
         vue.mixin(debugMix(options));
 
         //组件
