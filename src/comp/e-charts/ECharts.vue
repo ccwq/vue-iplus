@@ -184,9 +184,12 @@ export default {
     }
 }
 </script>
-<style scoped lang="less">
+<style lang="less">
 .echarts-comp {
-    .el{
+    ._container {
+        overflow: visible !important;
+    }
+    .el {
         width: 100%;
         height: 100%;
     }
