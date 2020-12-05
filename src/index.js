@@ -3,7 +3,6 @@ import throttle from "./mixin/throttle-method";
 import debugMix from "./mixin/console-by-name";
 import {mixin as accessVueByDomMixin} from "./mixin/access-vue-by-dom";
 import resizer from "./comp/resizer"
-
 import clickoutside from "./directives/clickoutside";
 
 /**
