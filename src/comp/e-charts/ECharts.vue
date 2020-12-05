@@ -1,7 +1,5 @@
 <template lang="pug">
-    v-box.echarts-comp(@change="_updateSizeHandler")
-        .el(ref="el")
-
+    v-box.echarts-comp(@change="_updateSizeHandler"): .el(ref="el")
 </template>
 <script>
 import vBox from "../v-box"
@@ -193,5 +191,8 @@ export default {
         width: 100%;
         height: 100%;
     }
+
+
+
 }
 </style>
