@@ -1,5 +1,7 @@
 <template lang="pug">
-    v-box.echarts-comp(@change="_updateSizeHandler"): .el(ref="el")
+    v-box.echarts-comp(@change="_updateSizeHandler")
+        .el(ref="el")
+        slot
 </template>
 <script>
 import vBox from "../v-box"
