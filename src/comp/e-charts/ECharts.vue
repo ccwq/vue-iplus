@@ -2,6 +2,8 @@
     v-box.echarts-comp(@change="_updateSizeHandler")
         .el(ref="el")
         slot
+        slot(name="header" slot="header")
+        slot(name="footer" slot="footer")
 </template>
 <script>
 import vBox from "../v-box"
