@@ -11,7 +11,10 @@ export default {
             if (isNaN(wait)) {
                 wait = 300;
             }
-            m[funName] = debounce(funBody.bind(m), wait);
+            if (!m.$options) {
+                m.$options = {};
+            }
+            m.$options.methods[funName] = debounce(funBody, wait);
         })
     }
 }

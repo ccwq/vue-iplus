@@ -1,4 +1,5 @@
 import throttle from "lodash/throttle";
+import debounce from "lodash/debounce";
 
 export default {
     beforeCreate() {
@@ -11,7 +12,10 @@ export default {
             if (isNaN(wait)) {
                 wait = 300;
             }
-            m[funName] = throttle(funBody.bind(m), wait);
+            if (!m.$options) {
+                m.$options = {};
+            }
+            m.$options.methods[funName] = debounce(funBody, wait);
         })
     }
 }
