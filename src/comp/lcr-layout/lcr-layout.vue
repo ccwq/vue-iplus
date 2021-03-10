@@ -55,7 +55,15 @@
                     if(!ls){
                         return [];
                     }
-                    return ls.split(",").map(el => parseFloat(el));
+                    return ls.split(",").map(el => {
+
+                        //has unit
+                        if (/[a-zA-Z]+$/.test(el)) {
+                            return el;
+                        }else{
+                            return parseFloat(el)
+                        }
+                    });
                 }
 
                 return ls;
@@ -67,7 +75,9 @@
                     if (isPlainObject(el)) {
                         return el;
                     }else{
-                        if(el>1){
+                        if (typeof el == "string") {
+                            return {width: el}
+                        }else if(el>1){
                             return {width: el + "px"}
                         }else{
                             return {flex: el};
