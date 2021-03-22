@@ -1,5 +1,7 @@
 <template lang="pug">
-    .v-box-comp()
+    .v-box-comp(
+        :class="[`overflowType_${overflowType}`]"
+    )
         slot(name="header")
         ._container_wp
             resizer(
@@ -28,6 +30,17 @@
         },
 
         props: {
+
+            /**
+             * 设置_container的overflow值
+             */
+            overflowType:{
+                default:"y",
+                type:String,
+                validator(prop){
+                    return ["auto", "hide", "x", "y"];
+                },
+            },
 
             //提升slot，以替换container的位置
             //需要slot为单节点
@@ -103,6 +116,26 @@
                 width: 100%;
                 overflow-y: auto;
             }
+        }
+
+        &.overflowType_hide{
+            >._container_wp>._container{
+                overflow: hidden;
+            }
+        }
+
+        &.overflowType_auto{
+            >._container_wp>._container{
+                overflow: auto;
+            }
+        }
+
+        &.overflowType_y{
+            overflow-y: auto;
+        }
+
+        &.overflowType_x{
+            overflow-x: auto;
         }
     }
 </style>
