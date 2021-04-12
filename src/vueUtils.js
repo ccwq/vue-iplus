@@ -1,35 +1,51 @@
+import isPlainObject from "lodash/isPlainObject"
+
 /**
  * 定义路由项
  * @param path
  * @param component
- * @param others 传入其他配置，当传入配置为数组时候，认为是children
- * @param children
- * @returns {{path: *, component: *}}
+ * @param
+ * "foo" name
+ * "=>foo/bar" 为redirece
+ * [...]  为子路由
+ * {render, template} 包含两个属性之一为component
+ * {} 为其他配置
  */
-export const defineRouter = function (path, component, others={}, children) {
+export const defineRouter = function (path, ...rest) {
+    let ret = {path};
+    rest.forEach(param=>{
 
-    //使用other字段传children修正
-    if (Array.isArray(others)) {
-        children = others;
-        others = undefined;
-    }
+        //数组
+        if(Array.isArray(param)){
+            if (params.length) {
+                ret.children = param;
+            }
+            //对象
+        }else if (isPlainObject(param)) {
 
+            //是否是组件
+            if (param.render || param.template) {
+                ret.component = param;
+            }else{
+                ret = Object.assign({}, param, ret);
+            }
 
-    if (!children && others && others.children) {
-        children = others.children;
-    }
+            //字符串
+        }else if (typeof param == "string") {
 
-    let ret = {
-        ...others,
-        path,
-        // component,
-        children
-    }
+            //重定向
+            if (param.startsWith("#")) {
+                ret.redirect = param.substr(2);
+                //别名
+            } else if(param.startsWith("?")){
+                ret.alias = param.substr(1);
 
-    if (typeof component == "string") {
-        ret.redirect = component;
-    }else{
-        ret.component = component;
-    }
+                //名字
+            } else{
+                ret.name = param;
+            }
+        }
+    })
+
     return ret;
 };
