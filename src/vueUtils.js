@@ -20,7 +20,7 @@ export const defineRouter = function (path, ...rest) {
             if (params.length) {
                 ret.children = param;
             }
-            //对象
+        //对象
         }else if (isPlainObject(param)) {
 
             //是否是组件
@@ -30,20 +30,24 @@ export const defineRouter = function (path, ...rest) {
                 ret = Object.assign({}, param, ret);
             }
 
-            //字符串
+        //字符串
         }else if (typeof param == "string") {
 
             //重定向
             if (param.startsWith("#")) {
                 ret.redirect = param.substr(2);
-                //别名
+            //别名
             } else if(param.startsWith("?")){
                 ret.alias = param.substr(1);
 
-                //名字
+            //名字
             } else{
                 ret.name = param;
             }
+
+        //异步组件
+        }else if (typeof param == "function") {
+            ret.component = param;
         }
     })
 
