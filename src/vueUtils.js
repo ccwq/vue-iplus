@@ -17,7 +17,7 @@ export const defineRouter = function (path, ...rest) {
 
         //数组
         if(Array.isArray(param)){
-            if (params.length) {
+            if (param.length) {
                 ret.children = param;
             }
         //对象
@@ -35,7 +35,7 @@ export const defineRouter = function (path, ...rest) {
 
             //重定向
             if (param.startsWith("#")) {
-                ret.redirect = param.substr(2);
+                ret.redirect = param.substr(1);
             //别名
             } else if(param.startsWith("?")){
                 ret.alias = param.substr(1);
