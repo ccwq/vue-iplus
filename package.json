@@ -35,8 +35,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "browser-image-size": "^1.1.0",
         "ipro": "^1.0.35",
-        "lodash": "^4.17.20",
-        "browser-image-size": "^1.1.0"
+        "lodash": "^4.17.20"
     }
 }
