@@ -27,6 +27,8 @@ export default {
     },
 
     methods: {
+
+        //手从触发重新布局
         resize() {
             const m = this;
             const $$parent = $(m.$el).parent();
