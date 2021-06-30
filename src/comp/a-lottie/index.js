@@ -1,2 +1,2 @@
-import a from "./a-lottie";
+import a from "./a-lottie.vue";
 export default a;
