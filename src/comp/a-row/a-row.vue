@@ -20,29 +20,36 @@ export default {
         "between":Boolean,
         "around":Boolean,
         "autoWidth":Boolean,
+        widthOffset:{
+            type:Number,
+            default:2,
+        },
+    },
+
+    methods: {
+        resize() {
+            const m = this;
+            const $$parent = $(m.$el).parent();
+            m.$nextTick(__=>{
+                $$parent.trigger("a-row-resize");
+            })
+        }
     },
 
     mounted(){
         const m = this;
+        const {widthOffset:offset} = m;
+
         const $$parent = $(m.$el).parent();
         const ekey = ".ev-" + m._uid;
-
         let $el = $(m.$el);
-
         const calcWidth = debounce(__ => {
             $el.addClass("_anchor");
             if ($el.nextAll("._anchor").length) {
                 return;
             }
-
             let $sibLs = $el.siblings(".a-row-comp").add(m.$el);
-
-            if (m.$attrs.name == 445) {
-                // debugger;
-            }
-
             let labels = $sibLs.find(">b").map((i, lb)=>lb.textContent.trim()).toArray();
-
             let maxLeng = Math.max.apply(
                 null,
                 labels.map(el => {
@@ -50,7 +57,8 @@ export default {
                 })
             )
             maxLeng = parseInt(maxLeng / 2);
-            maxLeng = maxLeng + 2;
+            maxLeng = maxLeng + offset;
+            console.log(maxLeng, 777);
             $sibLs.find(">b").css({
                 width: maxLeng + "em"
             });
@@ -142,6 +150,10 @@ export default {
                 margin-right: 0.5em;
             }
         }
+    }
+
+    .content{
+        word-break: break-all;
     }
 }
 </style>
