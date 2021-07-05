@@ -36,7 +36,7 @@
     },
     "dependencies": {
         "browser-image-size": "^1.1.0",
-        "ipro": "^1.0.61",
+        "ipro": "^1.0.64",
         "lodash": "^4.17.20"
     }
 }
