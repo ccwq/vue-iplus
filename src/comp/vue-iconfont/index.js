@@ -1,2 +1,2 @@
-import com from "./vue-iconfont";
+import com from "./vue-iconfont.vue";
 export default com;
