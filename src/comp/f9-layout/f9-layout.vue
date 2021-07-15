@@ -175,10 +175,7 @@
                         class: [className],
                     }
 
-
                     let width = 0, height = 0;
-
-
                     if (className.indexOf("l")!=-1) {
                         width = m.col_w_1;
                     }
